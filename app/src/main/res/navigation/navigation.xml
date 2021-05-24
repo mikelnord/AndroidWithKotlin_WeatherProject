@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/cityTrackerFragment">
+
+    <fragment
+        android:id="@+id/cityTrackerFragment"
+        android:name="com.gb.weatherproject.citytracker.CityTrackerFragment"
+        android:label="CityTrackerFragment">
+        <action
+            android:id="@+id/action_cityTrackerFragment_to_weatherDetailFragment"
+            app:destination="@id/weatherDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDetailFragment"
+        android:name="com.gb.weatherproject.detail.WeatherDetailFragment"
+        android:label="WeatherDetailFragment" >
+        <action
+            android:id="@+id/action_weatherDetailFragment_to_cityTrackerFragment"
+            app:destination="@id/cityTrackerFragment"
+            app:popUpTo="@id/cityTrackerFragment"
+            app:popUpToInclusive="true" />
+        <argument android:name="id"
+            app:argType="integer" />
+    </fragment>
+</navigation>
