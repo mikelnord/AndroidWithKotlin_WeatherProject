@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.gb.weatherproject.R
+import com.gb.weatherproject.database.Dataset
 import com.gb.weatherproject.databinding.FragmentCityTrackerBinding
 import com.gb.weatherproject.model.RepositoryImpl
 
@@ -23,8 +24,8 @@ class CityTrackerFragment : Fragment() {
             inflater,
             R.layout.fragment_city_tracker, container, false
         )
-        val repository = RepositoryImpl()
-        val viewModelFactory = CityTrackerViewModelFactory(repository)
+
+        val viewModelFactory = CityTrackerViewModelFactory(dataset = Dataset)
         val cityTrackerViewModel =
             ViewModelProvider(this, viewModelFactory).get(CityTrackerViewModel::class.java)
         binding.lifecycleOwner = this
@@ -43,6 +44,7 @@ class CityTrackerFragment : Fragment() {
         })
         adapter.data = cityTrackerViewModel.citys
         binding.cityList.adapter = adapter
+
         return binding.root
     }
 }

@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gb.weatherproject.databinding.TextItemViewBinding
 import com.gb.weatherproject.model.Weather
 
-class WeatherAdapter(private val clickListener: WeatherListener) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
+class WeatherAdapter(private val clickListener: WeatherListener) :
+    RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
     var data = listOf<Weather>()
         set(value) {
@@ -27,12 +28,13 @@ class WeatherAdapter(private val clickListener: WeatherListener) : RecyclerView.
     override fun getItemCount() = data.size
 
 
-    class ViewHolder private constructor(private val binding:TextItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(private val binding: TextItemViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(weather: Weather, clickListener: WeatherListener) {
-            binding.weather=weather
-            binding.clickListener=clickListener
+            binding.weather = weather
+            binding.clickListener = clickListener
 
         }
 
@@ -46,6 +48,6 @@ class WeatherAdapter(private val clickListener: WeatherListener) : RecyclerView.
     }
 }
 
-class WeatherListener(val clickListener: (id:Int) -> Unit) {
+class WeatherListener(val clickListener: (id: Int) -> Unit) {
     fun onClick(weather: Weather) = clickListener(weather.id)
 }

@@ -1,14 +1,14 @@
 package com.gb.weatherproject.detail
 
 import androidx.lifecycle.ViewModel
-import com.gb.weatherproject.model.Repository
+import com.gb.weatherproject.database.Dataset
 import com.gb.weatherproject.model.Weather
 
-class WeatherDetailViewModel(id: Int, repository: Repository):ViewModel() {
+class WeatherDetailViewModel(id: Int, dataset:Dataset):ViewModel() {
 
-    private val weather: Weather = repository.getWeatherFromId(id)
+    private val weather: Weather = dataset.getWeatherFromId(id)
 
-    fun getweather(): Weather {
+    fun getWeather(): Weather {
         return weather
     }
 

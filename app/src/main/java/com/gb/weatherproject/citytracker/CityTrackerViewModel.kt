@@ -2,15 +2,15 @@ package com.gb.weatherproject.citytracker
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gb.weatherproject.model.Repository
+import com.gb.weatherproject.database.Dataset
 
-class CityTrackerViewModel(repository: Repository) : ViewModel() {
+class CityTrackerViewModel(dataset: Dataset) : ViewModel() {
 
     private val _navigateToWeatherDetail = MutableLiveData<Int?>()
     val navigateToWeatherDetail
         get() = _navigateToWeatherDetail
 
-    val citys = repository.getCitysRu()
+    val citys = dataset.getCitysRu()
 
     fun onWeatherNavigated() {
         _navigateToWeatherDetail.value = null
