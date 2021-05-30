@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gb.weatherproject.detail.WeatherDetailViewModel" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mainView"
@@ -16,7 +23,8 @@
                 android:id="@+id/cityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/city_name_margin_top"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.location.name}"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -28,17 +36,18 @@
                 android:id="@+id/cityCoordinates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.current.condition.text}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cityName"
-                tools:text="lt/ln: 55.755826, 37.617299900000035" />
+                tools:text="солнечно" />
 
             <TextView
                 android:id="@+id/temperatureLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15_dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/temperature_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +57,8 @@
                 android:id="@+id/temperatureValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15_dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.current.temp_c}"
                 android:textSize="@dimen/temperature_value_text_size"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +70,7 @@
                 android:id="@+id/feelsLikeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15_dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/feels_like_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +80,8 @@
                 android:id="@+id/feelsLikeValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_15_dp"
+                android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.current.feelslike_c}"
                 android:textSize="@dimen/feels_like_text_size"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,20 +89,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/feelsLikeLabel"
                 tools:text="-23" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <FrameLayout
-            android:id="@+id/loadingLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/loadingBackground"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <ProgressBar
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </FrameLayout>
     </FrameLayout>
+
 </layout>
