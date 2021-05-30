@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gb.weatherproject.detail.WeatherDetailViewModel" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.location.name}"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +37,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.current.condition.text}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cityName"
-                tools:text="lt/ln: 55.755826, 37.617299900000035" />
+                tools:text="солнечно" />
 
             <TextView
                 android:id="@+id/temperatureLabel"
@@ -49,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.current.temp_c}"
                 android:textSize="@dimen/temperature_value_text_size"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:text="@{viewModel.response.current.feelslike_c}"
                 android:textSize="@dimen/feels_like_text_size"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

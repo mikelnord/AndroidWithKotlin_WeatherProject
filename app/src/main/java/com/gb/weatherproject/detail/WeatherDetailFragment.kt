@@ -25,18 +25,15 @@ class WeatherDetailFragment : Fragment() {
             inflater,
             R.layout.fragment_detail, container, false
         )
-        val repository = RepositoryImpl()
+
         val arguments = WeatherDetailFragmentArgs.fromBundle(requireArguments())
 
         val viewModelFactory = WeatherDetailViewModelFactory(arguments.id, dataset = Dataset)
         val weatherDetailViewModel = ViewModelProvider(this, viewModelFactory).get(
             WeatherDetailViewModel::class.java
         )
-        val weather = weatherDetailViewModel.getWeather()
-        binding.cityCoordinates.text = "${weather.city.lat}/${weather.city.lon}"
-        binding.cityName.text = weather.city.city
-        binding.temperatureValue.text = weather.temperature.toString()
-        binding.feelsLikeValue.text = weather.feelsLike.toString()
+        binding.setLifecycleOwner(this)
+        binding.viewModel = weatherDetailViewModel
         return binding.root
     }
 }
