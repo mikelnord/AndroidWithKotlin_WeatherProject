@@ -1,5 +1,6 @@
 package com.gb.weatherproject.citytracker
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,24 +12,30 @@ import androidx.navigation.fragment.findNavController
 import com.gb.weatherproject.R
 import com.gb.weatherproject.database.Dataset
 import com.gb.weatherproject.databinding.FragmentCityTrackerBinding
-import com.gb.weatherproject.model.RepositoryImpl
+import com.gb.weatherproject.network.ConnectionLiveData
 
 class CityTrackerFragment : Fragment() {
+    private var binding: FragmentCityTrackerBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
 
-        val binding: FragmentCityTrackerBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_city_tracker, container, false
         )
+        return binding?.root
+    }
 
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val viewModelFactory = CityTrackerViewModelFactory(dataset = Dataset)
         val cityTrackerViewModel =
             ViewModelProvider(this, viewModelFactory).get(CityTrackerViewModel::class.java)
-        binding.lifecycleOwner = this
+        binding?.lifecycleOwner = this
         val adapter = WeatherAdapter(WeatherListener { id ->
             cityTrackerViewModel.onWeatherClicked(id)
         })
@@ -43,8 +50,20 @@ class CityTrackerFragment : Fragment() {
             }
         })
         adapter.data = cityTrackerViewModel.citys
-        binding.cityList.adapter = adapter
+        binding?.cityList?.adapter = adapter
 
-        return binding.root
+        val connectionLiveData = context?.let { ConnectionLiveData(it) }
+        connectionLiveData?.observe(viewLifecycleOwner, {
+            if (it)
+                binding?.textNetStatus?.text = "Connection active"
+            else
+                binding?.textNetStatus?.text = "Connection lost"
+        })
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
