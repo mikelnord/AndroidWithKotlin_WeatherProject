@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.gb.weatherproject.R
 import com.gb.weatherproject.database.Dataset
 import com.gb.weatherproject.databinding.FragmentDetailBinding
-import com.gb.weatherproject.model.RepositoryImpl
 
 class WeatherDetailFragment : Fragment() {
     @SuppressLint("SetTextI18n")
