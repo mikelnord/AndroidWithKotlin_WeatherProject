@@ -68,8 +68,8 @@
                 android:text="@{viewModel.response.current.feelslike_c}"
                 android:textSize="@dimen/feels_like_text_size"
                 android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureValue"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/feels"
                 tools:text="-23" />
 
             <TextView
