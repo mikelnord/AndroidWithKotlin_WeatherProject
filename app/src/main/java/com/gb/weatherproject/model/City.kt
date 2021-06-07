@@ -6,6 +6,7 @@ data class City(
     val lon: Double
 )
 data class Weather(
+    val id:Int,
     val city: City = getDefaultCity(),
     val temperature: Int = 0,
     val feelsLike: Int = 0
