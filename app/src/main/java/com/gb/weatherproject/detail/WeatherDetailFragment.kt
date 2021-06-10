@@ -13,6 +13,8 @@ import com.gb.weatherproject.database.Dataset
 import com.gb.weatherproject.databinding.FragmentDetailBinding
 
 class WeatherDetailFragment : Fragment() {
+    private lateinit var binding: FragmentDetailBinding
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,19 +22,39 @@ class WeatherDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val binding: FragmentDetailBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_detail, container, false
         )
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val arguments = WeatherDetailFragmentArgs.fromBundle(requireArguments())
 
         val viewModelFactory = WeatherDetailViewModelFactory(arguments.id, dataset = Dataset)
         val weatherDetailViewModel = ViewModelProvider(this, viewModelFactory).get(
             WeatherDetailViewModel::class.java
         )
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
         binding.viewModel = weatherDetailViewModel
-        return binding.root
+        binding.buttonClear.setOnClickListener {
+            weatherDetailViewModel.clear()
+        }
+
+        val adapter = WeatherHistoryAdapter()
+
+        binding.lifecycleOwner?.let {
+            weatherDetailViewModel.history.observe(
+                it,
+                {
+                    adapter.data = it
+                    binding.listHistory.adapter = adapter
+                }
+            )
+        }
+
     }
+
 }

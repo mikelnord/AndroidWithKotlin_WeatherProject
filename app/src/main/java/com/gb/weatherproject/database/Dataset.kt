@@ -4,7 +4,7 @@ import com.gb.weatherproject.model.City
 import com.gb.weatherproject.model.Weather
 
 object Dataset {
-    val listWeather: List<Weather> = listOf(
+    private val listWeather: List<Weather> = listOf(
         Weather(0, City("Москва", 55.755826, 37.617299900000035), 1, 2),
         Weather(1, City("Санкт-Петербург", 59.9342802, 30.335098600000038), 3, 3),
         Weather(2, City("Новосибирск", 55.00835259999999, 82.93573270000002), 5, 6),
