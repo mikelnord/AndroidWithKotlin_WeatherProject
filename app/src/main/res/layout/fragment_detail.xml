@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gb.weatherproject.detail.WeatherDetailViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/cityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.response.location.name}"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Москва" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="120dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.response.current.condition.icon}"
+                app:layout_constraintDimensionRatio="h,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cityName"
+                tools:srcCompat="@drawable/dozd" />
+
+            <TextView
+                android:id="@+id/temperatureValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.response.current.temp_c}"
+                android:textSize="@dimen/temperature_value_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/title_template"
+                tools:text="+15" />
+
+            <TextView
+                android:id="@+id/feelsLikeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.response.current.feelslike_c}"
+                android:textSize="@dimen/feels_like_text_size"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/temperatureValue"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                tools:text="-23" />
+
+            <TextView
+                android:id="@+id/lastUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{viewModel.response.current.last_updated}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="2021-06-06 05:00" />
+
+            <TextView
+                android:id="@+id/weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.response.current.condition.text}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="Солнечно" />
+
+            <TextView
+                android:id="@+id/feels"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/feels_like_label"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/cityName" />
+
+            <TextView
+                android:id="@+id/title_template"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/temperature_label"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/cityName" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_history"
+                android:layout_width="317dp"
+                android:layout_height="293dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weather" />
+
+            <Button
+                android:id="@+id/button_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/clear_history"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</layout>
