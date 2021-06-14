@@ -97,7 +97,7 @@ class ListContacts : Fragment() {
         requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), REQUEST_CODE)
     }
 
-    // Обратный вызов после получения разрешений от пользователя
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>, grantResults: IntArray
@@ -109,7 +109,6 @@ class ListContacts : Fragment() {
                 ) {
                     getContacts()
                 } else {
-                    // Поясните пользователю, что экран останется пустым, потому что доступ к контактам не предоставлен
                     context?.let {
                         AlertDialog.Builder(it)
                             .setTitle("Доступ к контактам")
