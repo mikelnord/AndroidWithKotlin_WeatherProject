@@ -2,13 +2,13 @@ package com.gb.weatherproject.citytracker
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.gb.weatherproject.R
 import com.gb.weatherproject.database.Dataset
 import com.gb.weatherproject.databinding.FragmentCityTrackerBinding
@@ -26,6 +26,7 @@ class CityTrackerFragment : Fragment() {
             inflater,
             R.layout.fragment_city_tracker, container, false
         )
+        setHasOptionsMenu(true)
         return binding?.root
     }
 
@@ -66,4 +67,15 @@ class CityTrackerFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                || super.onOptionsItemSelected(item)
+    }
+
 }
