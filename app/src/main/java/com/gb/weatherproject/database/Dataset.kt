@@ -15,10 +15,10 @@ object Dataset {
         Weather(7, City("Омск", 54.9884804, 73.32423610000001), 15, 16),
         Weather(8, City("Ростов-на-Дону", 47.2357137, 39.701505), 17, 18),
         Weather(9, City("Уфа", 54.7387621, 55.972055400000045), 19, 20),
-        Weather(10, City("Владивосток", 0.0, 0.0), 19, 20),
-        Weather(11, City("Хабаровск", 0.0, 0.0), 19, 20),
-        Weather(12, City("Севастополь", 0.0, 0.0), 19, 20)
-    )
+        Weather(10, City("Владивосток", 43.115536, 131.885485), 19, 20),
+        Weather(11, City("Хабаровск", 48.480223, 135.071917), 19, 20),
+
+        )
 
     fun getCitysRu(): List<Weather> {
         return listWeather
@@ -27,4 +27,13 @@ object Dataset {
     fun getWeatherFromId(id: Int): Weather {
         return listWeather[id]
     }
+
+    fun getIdFromName(name: String?): Int {
+        for (w in listWeather) {
+            if (w.city.city == name)
+                return w.id
+        }
+        return -100
+    }
+
 }

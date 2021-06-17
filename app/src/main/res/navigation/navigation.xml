@@ -32,4 +32,14 @@
         android:name="com.gb.weatherproject.context.ListContacts"
         android:label="fragment_content_provider"
         tools:layout="@layout/fragment_content_provider" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.gb.weatherproject.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_weatherDetailFragment"
+            app:destination="@id/weatherDetailFragment"
+            app:popUpTo="@id/mapsFragment" />
+    </fragment>
 </navigation>
