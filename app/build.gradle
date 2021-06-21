@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id("androidx.navigation.safeargs")
     id 'com.google.android.secrets-gradle-plugin' version '1.1.0'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -55,6 +56,7 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.room:room-ktx:2.3.0'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
     kapt "androidx.room:room-compiler:2.3.0"
 
     implementation 'com.google.android.gms:play-services-maps:17.0.1'

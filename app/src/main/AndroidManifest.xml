@@ -21,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherProject">
 
+        <service android:name=".MyService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
