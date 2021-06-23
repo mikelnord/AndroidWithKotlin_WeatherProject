@@ -21,12 +21,3 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .into(imgView)
     }
 }
-
-//https://cdn.weatherapi.com/weather/64x64/day/113.png
-@BindingAdapter("stringUrl")
-fun bindString(txt: TextView, imgUrl: String?) {
-    imgUrl?.let {
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-        txt.text = imgUrl
-    }
-}

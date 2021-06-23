@@ -36,6 +36,26 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    flavorDimensions 'version'
+    productFlavors {
+        freeVersion {
+            dimension "version"
+            versionNameSuffix '.free'
+        }
+
+        paidVersion {
+            dimension "version"
+            versionNameSuffix '.paid'
+        }
+    }
+
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        def apiKey  = properties.getProperty("weather_api_key", "")
+        it.buildConfigField "String", "WEATHER_API_KEY", apiKey
+    }
 }
 
 dependencies {

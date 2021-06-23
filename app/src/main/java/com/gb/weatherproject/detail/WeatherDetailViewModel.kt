@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gb.weatherproject.BuildConfig
 import com.gb.weatherproject.database.Dataset
 import com.gb.weatherproject.database.WeatherHistory
 import com.gb.weatherproject.database.WeatherRepository
@@ -38,10 +39,18 @@ class WeatherDetailViewModel(id: Int, dataset: Dataset) : ViewModel() {
             try {
 
                 _response.value = WeatherApi.retrofitService.requestWeatherForCity(
-                    "db0aebcfc78145daa67100341212905",
+                    BuildConfig.WEATHER_API_KEY,
                     weather.city.city,
                     "ru"
                 )
+            } catch (e: Exception) {
+                Log.e("Weather", e.message.toString())
+            }
+        }
+    }
+
+    fun insertHistory(){
+        viewModelScope.launch {
                 response.value?.let {
                     weatherRepository.insert(
                         WeatherHistory(
@@ -53,13 +62,6 @@ class WeatherDetailViewModel(id: Int, dataset: Dataset) : ViewModel() {
                         )
                     )
                 }
-
-
-            } catch (e: Exception) {
-
-                Log.e("Weather", e.message.toString())
-
-            }
         }
     }
 

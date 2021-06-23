@@ -14,6 +14,7 @@ import com.gb.weatherproject.databinding.FragmentDetailBinding
 
 class WeatherDetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
+    private lateinit var weatherDetailViewModel: WeatherDetailViewModel
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -34,7 +35,7 @@ class WeatherDetailFragment : Fragment() {
         val arguments = WeatherDetailFragmentArgs.fromBundle(requireArguments())
 
         val viewModelFactory = WeatherDetailViewModelFactory(arguments.id, dataset = Dataset)
-        val weatherDetailViewModel = ViewModelProvider(this, viewModelFactory).get(
+        weatherDetailViewModel = ViewModelProvider(this, viewModelFactory).get(
             WeatherDetailViewModel::class.java
         )
         binding.lifecycleOwner = this
@@ -55,6 +56,11 @@ class WeatherDetailFragment : Fragment() {
             )
         }
 
+    }
+
+    override fun onStop() {
+        weatherDetailViewModel.insertHistory()
+        super.onStop()
     }
 
 }
